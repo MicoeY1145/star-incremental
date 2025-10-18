@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星空增量0.1.5</title>
+    版本：v0.1.5
+    <link rel="stylesheet" href="style0.1.5.css">
+    <script>
+        // 文件加载检查
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameJsLoaded = Array.from(document.scripts).some(
+                script => script.src.includes('game0.1.5.js')
+            );
+            
+            if (!gameJsLoaded) {
+                console.error('错误：game0.1.5.js 文件未加载！');
+                alert('错误：game0.1.5js 文件未加载！请检查控制台获取详情');
+            }
+        });
+    </script>
+    <style>
+        /* 通知样式 */
+        .notification {
+            position: fixed;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(50, 150, 50, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: top 0.5s ease;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .notification.show {
+            top: 20px;
+        }
+
+        /* 选项卡 */
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+
+        .tab-buttons button {
+            padding: 0.625rem 1.25rem;
+            border: 1px solid #00eeff;
+            background-color: #ddd;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .tab-buttons button.active {
+            background-color: #0c65e1;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 1.25rem;
+            border: 1px solid #ccc;
+            border-radius: 0.3125rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="news-ticker-container">
+           <div id="news-ticker">
+           传送门🚪       🚪传送门
+           </div>
+    </div>
+    <div class="game-container">
+        <h1>星空增量</h1>
+        <!-- 资源显示 -->
+        <div id="resource-display">
+            <p>星尘: <span id="stardust-count">0</span></p>
+            <p>每秒星尘: <span id="stardust-per-second">0</span></p>
+            <p>每次点击: +<span id="stardust-per-click">1</span></p>
+        </div>
+        
+        <!-- 主要点击按钮 -->
+        <button id="click-button">收集星尘</button>
+
+        <!-- Tabs -->
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="stardust">星尘</button>
+            <button class="tab-button" data-tab="options">选项</button>
+        </div>
+
+        <!-- Stardust Tab -->
+        <div id="stardust" class="tab-content active">
+            <!-- Producers Area -->
+            <div class="producers-container">
+                <h2>星尘凝聚器</h2>
+                <div class="producer" id="stardustCondenser-producer">
+                    <p>数量: <span id="condenser-count">0</span></p>
+                    <p>成本: <span id="condenser-cost">10</span>星尘</p>
+                    <p>产出: <span id="condenser-production">1</span>星尘/秒</p>
+                    <button id="buy-stardustCondenser">制作星尘凝聚器</button>
+                </div>
+                <h2>星尘收集器</h2>
+                <div class="producer" id="stardustCollector-producer">
+                    <p>数量: <span id="collector-count">0</span></p>
+                    <p>成本: <span id="collector-cost">150</span>星尘</p>
+                    <p>产出: <span id="collector-production">20</span>星尘/秒</p>
+                    <button id="buy-stardustCollector">制作星尘收集器</button>
+                </div>
+                
+                <h2>星尘生成器</h2>
+                <div class="producer" id="stardustGenerater-producer">
+                    <p>数量: <span id="generater-count">0</span></p>
+                    <p>成本: <span id="generater-cost">2500</span>星尘</p>
+                    <p>产出: <span id="generater-production">500</span>星尘/秒</p>
+                    <button id="buy-stardustGenerater">制作星尘生成器</button>
+                </div>   
+            </div>
+
+            <!-- 升级区域 -->
+            <div class="upgrades-container">
+                <h2>升级</h2>
+                <div id="upgrades-grid" class="upgrades-grid">
+                    <!-- 升级项将通过JS动态添加 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 杂项选项卡-->
+        <div id="options" class="tab-content">
+            <h2>杂项</h2>
+            <button id="reset-button">重置游戏</button>
+            <button id="toggle-css-button">切换 CSS</button>
+            <br>
+             支持所有序数增量吧吧友，你可以点击链接来游玩吧友们自制的增量游戏：
+            <br>
+             <a href="https://rbn-rewrite-team.github.io/RBNR/">大数之路重制版</a>
+             <a href="https://seanxlx2011.github.io/">数据增量重制版</a>
+             <a href="https://veryrrdefine.github.io/MdVI-rewritten/">多元体积增量</a>
+             <a href="https://dlsdl.github.io/wind_spirit_creation/">风灵做成</a>
+             <br>
+             作者：micoe（B站苊分子）。
+             <br>
+             //更新日志：忘了 忘了更新内容。
+            <br>
+             //更新日志：0.1.3.2 修复BUG，增加新生产者：星尘生成器。
+            <br>
+            //更新日志：0.1.4 新增升级：星尘凝聚器升级II，星尘生成器升级I，修复了BUG,进行了平衡性调整。
+           <br>
+           //更新日志：0.1.4.1 修复了BUG。
+          <br>
+          //更新日志：0.1.5 增加选项卡，滚动新闻，CSS样式切换。
+        </div>
+    </div>
+    <script src="./game0.1.5.js"></script>
+</body>
+</html>
