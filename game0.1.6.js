@@ -36,7 +36,6 @@ let lastSentence = null;
 //全局变量区
 let recursiveProductionEnabled = false;
 let attractionEnabled = false;
-let transformerUnlocked = false;
 
 let transformerActive = false;
 let transformerMultiplier = 1;
@@ -446,7 +445,7 @@ function updateUI() {
     });
     const panel = document.getElementById("transformer-panel");
     if (panel) {
-        panel.style.display = transformerUnlocked ? "block" : "none";
+        panel.style.display = isUpgradeBought("stardustTransformer") ? "block" : "none";
     }
 }
     
@@ -541,10 +540,6 @@ function buyUpgrade(upgradeId) {
   
     } else if (upgrade.effect.type === "attraction") {
       attractionEnabled = true;
-
-    }else if (upgrade.effect.type === "transformer") {
-    transformerUnlocked = true;
-
     }
   
     stardustPerSecond = calculateSPS();
