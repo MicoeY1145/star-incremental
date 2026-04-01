@@ -31,6 +31,7 @@ const newsSentences = [
     { text: "玉米女儿问玉米妈妈：玉米爸爸在哪里？玉米妈妈说：玉米爸爸去银行爆点米花了。",weight: 3},
     { text: "红鲨在坐车回家的路上，因为速度(受二重软上限限制)、超临界折算|路程，迟迟到不了家",weight: 4},
     { text: "别以为4下少，底数2有ε0呢（OCF）",weight: 4},
+    { text: "愚人节快乐！！！！",weight:6},
 ]
 let lastSentence = null;
 //全局变量区
@@ -254,6 +255,17 @@ const upgrades = [
         prerequisites: ["stardustCondenserSuperI"],
         description: "将星尘转化成星尘倍率。"
     },
+    {
+        id: "april_fools_day",
+        name: "愚人节",
+        cost: 2026401,
+        bought: false,
+        effect: {
+            type: "fool"
+        },
+        prerequisites: ["stardustCondenserSuperI"],
+        description: "星尘倍率*2026401"
+    },
 ];
 
 
@@ -283,6 +295,8 @@ const achievements = [
     check: () => isUpgradeBought("recursiveProduction")},
   { id: "a_attraction",name:"我因该要^3的",req:"购买「吸引性」升级",unlocked: false,
     check: () => isUpgradeBought("attraction")},
+  { id: "a_fool",name:"你被骗了！",req:"购买「愚人节」升级",unlocked: false,
+    check: () => isUpgradeBought("april_fools_day")},
 ];
 
 function getAchievementMultiplier() {
@@ -494,6 +508,8 @@ function getUpgradeDescription(upgrade) {
         return "星尘膨胀现在的效果额外乘以 (1 + log10(星尘数量))";
     } else if (upgrade.effect.type === "transformer") {
         return "消耗设定的星尘量（最少1e10）来获得log8(星尘量）秒的log2(星尘量）倍星尘获取";
+    } else if (upgrade.effect.type === "fool") {
+        return "纯粹的虚假和愚人，没有一点真实。";
     }
 
     return "未知效果";
