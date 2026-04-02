@@ -31,7 +31,6 @@ const newsSentences = [
     { text: "玉米女儿问玉米妈妈：玉米爸爸在哪里？玉米妈妈说：玉米爸爸去银行爆点米花了。",weight: 3},
     { text: "红鲨在坐车回家的路上，因为速度(受二重软上限限制)、超临界折算|路程，迟迟到不了家",weight: 4},
     { text: "别以为4下少，底数2有ε0呢（OCF）",weight: 4},
-    { text: "愚人节快乐！！！！",weight:6},
 ]
 let lastSentence = null;
 //全局变量区
@@ -254,17 +253,6 @@ const upgrades = [
         },
         prerequisites: ["stardustCondenserSuperI"],
         description: "将星尘转化成星尘倍率。"
-    },
-    {
-        id: "april_fools_day",
-        name: "愚人节",
-        cost: 2026401,
-        bought: false,
-        effect: {
-            type: "fool"
-        },
-        prerequisites: ["stardustCondenserSuperI"],
-        description: "星尘倍率*2026401"
     },
 ];
 
